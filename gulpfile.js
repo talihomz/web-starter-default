@@ -2,6 +2,7 @@ const gulp        = require('gulp');
 const browserSync = require('browser-sync').create();
 const runSequence = require('run-sequence');
 const sass        = require('gulp-sass');
+const babel       = require('gulp-babel');
 
 // Static Server + watching scss/html files
 gulp.task('serve', () => {
@@ -39,7 +40,8 @@ gulp.task('html', () => {
 
 // Compile Javascript
 gulp.task('js', () => {
-  gulp.src('src/js/*.js')
+  gulp.src('src/js/**/*.js')
+    .pipe(babel())
     .pipe(gulp.dest('public/js'))
     .pipe(browserSync.stream())
 });
